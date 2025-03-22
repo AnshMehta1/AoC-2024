@@ -1063,7 +1063,9 @@ function read_file_to_string(filename) result(str)
     function parse_nums64(line) result(ints)
         character(len=*),intent(in) :: line
         integer(ip),dimension(:),allocatable :: ints ! array of integers
-        ints = int(split(line, ' '))
+        type(string),dimension(:),allocatable :: vals
+        vals = split(line, ' ')
+        ints = int(vals)
     end function parse_nums64
 
 !****************************************************************
