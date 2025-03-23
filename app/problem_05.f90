@@ -62,7 +62,10 @@ do i = 1, n
             end if
         else
             ! 47|53
-            read(line, '(I2,A1,I2)') i1, c, i2
+            !read(line, '(I2,A1,I2)') i1, c, i2
+            i1 = my_str_to_int(line(1:2))
+            c = line(3:3)
+            i2 = my_str_to_int(line(4:5))
             i1_array = [i1_array, i1]  ! accumulate the dependencies in arrays
             i2_array = [i2_array, i2]
         end if
@@ -76,5 +79,19 @@ write(*,*) '5a:', isum
 write(*,*) '5b:', isum2
 
 call clk%toc('5')
+
+contains
+
+    function my_str_to_int(s) result(n)
+        implicit none
+        character(len=2), intent(in) :: s
+        integer :: n, i, digit
+
+        n = 0
+        do i = 1, 2
+            digit = ichar(s(i:i)) - ichar('0')  
+            n = n * 10 + digit
+        end do
+    end function my_str_to_int
 
 end program problem_05
