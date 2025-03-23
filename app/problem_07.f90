@@ -47,10 +47,12 @@ program problem_07
             integer(ip),dimension(:),allocatable,intent(out) :: ivals !! list of values
             integer,dimension(:),allocatable,intent(out) :: ioperators !! will just allocate this array
             type(string), dimension(:), allocatable :: vals
+            type(string), dimension(:), allocatable :: temp
             ! 161011: 16 10 13
             vals    = split(line,': ')
             iresult = str_to_int64(vals(1))  ! the results of the calculation
-            ivals   = str_to_int64(split(vals(2), ' '))  ! array of values to do the calculation
+            temp = split(vals(2), ' ')
+            ivals   = str_to_int64(temp)  ! array of values to do the calculation
             allocate(ioperators(size(ivals)-1)) ! size = number of spaces
         end subroutine parse_line
 
