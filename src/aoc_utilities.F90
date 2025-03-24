@@ -395,6 +395,16 @@ function read_file_to_string(filename) result(str)
     end function read_file_to_int_vec
 !****************************************************************
 
+    function my_char_to_int(s) result(n)
+
+        implicit none
+
+        character(len=1), intent(in) :: s
+        integer :: n
+
+        n = ichar(s(1:1)) - ichar('0') 
+    end function my_char_to_int
+
 !****************************************************************
 !>
 !  Read a file into a 2d int array. Uses the '(*(I1))' format.
@@ -403,7 +413,7 @@ function read_file_to_string(filename) result(str)
         character(len=*),intent(in) :: filename
         integer,dimension(:,:),allocatable :: array
 
-        integer :: i, iunit, n_lines, n_cols
+        integer :: i, iunit, n_lines, n_cols , j
         character(len=:),allocatable :: line
 
         open(newunit=iunit, file=filename, status='OLD')
@@ -414,7 +424,10 @@ function read_file_to_string(filename) result(str)
         allocate(array(n_lines, n_cols))
         do i = 1, n_lines
             line = read_line(iunit)
-            read(line,'(*(I1))') array(i,1:n_cols)
+            ! read(line,'(*(I1))') array(i,1:n_cols)
+            do j = 1 , n_cols
+                array(i,j) = my_char_to_int(line(j:j))
+            end do 
         end do
         close(iunit)
 
