@@ -13,12 +13,14 @@ program problem_11
         integer(ip) :: count = 0  !! the number of times this stone appears
     end type stone
     type(stone),dimension(:),allocatable :: unique_stones
+    type(string),dimension(:),allocatable :: temp
 
     call clk%tic()
 
     ! open(newunit=iunit, file='inputs/day11_test.txt', status='OLD')
     open(newunit=iunit, file='inputs/day11.txt', status='OLD')
-    array = int(split(trim(adjustl(read_line(iunit))), ' '))
+    temp = split(trim(adjustl(read_line(iunit))), ' ')
+    array = int(temp)
     close(iunit)
 
     unique_stones = [(stone(array(i), 1), i = 1, size(array))] ! initialize
