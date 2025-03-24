@@ -6,6 +6,7 @@ program problem_08
 
     integer :: i,j,nrows,ncols,k,n,idel,jdel
     character(len=1),dimension(:,:),allocatable :: array
+    character(len=1),dimension(:),allocatable :: temp
     logical,dimension(:,:),allocatable :: antinodes, antinodes2
     character(len=1),dimension(:),allocatable :: unique_antennas
     integer,dimension(:),allocatable :: iant, jant
@@ -21,7 +22,8 @@ program problem_08
     antinodes2 = antinodes ! for part 2
 
     ! identify all the unique antennas in the array:
-    unique_antennas = achar(unique(ichar(pack(array, mask=array/='.'))))
+    temp = pack(array, mask=array/='.')
+    unique_antennas = achar(unique(ichar(temp)))
     ! process each antenna one at a time:
     do i = 1, size(unique_antennas)
         ! get all the indices of this character (this type of antenna):
