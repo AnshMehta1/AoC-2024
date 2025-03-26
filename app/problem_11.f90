@@ -93,8 +93,16 @@ program problem_11
         type(stone),dimension(:),allocatable,intent(inout) :: s !! stones to update
         integer(ip),intent(in) :: val
         integer(ip),intent(in) :: icount !! the current count of val
-        integer(ip) :: iloc
-        !iloc = findloc(s%value, val, dim=1) ! is it already there?
+        integer(ip) :: iloc , i
+        integer(ip) ,dimension(:),allocatable :: temp_findloc
+        allocate(temp_findloc(size(s)))
+
+        do i = 1 , size(temp_findloc)
+            temp_findloc(i) = s(i)%value
+        end do
+
+        iloc = findloc(temp_findloc, val, dim=1) ! is it already there?
+        deallocate(temp_findloc)
         if (iloc==0) then
             s = [s, stone(val, icount)] ! add a new one
         else
