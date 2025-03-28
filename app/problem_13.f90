@@ -9,7 +9,7 @@ program problem_13
 
     implicit none
 
-    integer :: iunit, i, n_lines
+    integer :: iunit, i, n_lines_duplicate
     character(len=:),allocatable :: line
     type(string),dimension(:),allocatable :: vals
     real(wp),dimension(2,2) :: a, ainv
@@ -22,10 +22,10 @@ program problem_13
 
     ! open(newunit=iunit, file='inputs/day13_test.txt', status='OLD')
     open(newunit=iunit, file='inputs/day13.txt', status='OLD')
-    n_lines = number_of_lines_in_file(iunit)
+    n_lines_duplicate = number_of_lines_in_file(iunit)
     icost = 0
     icost2 = 0
-    do i = 1, n_lines, 4
+    do i = 1, n_lines_duplicate, 4
 
         ! note: no - signs in the data
 
