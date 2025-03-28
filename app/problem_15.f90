@@ -4,7 +4,7 @@ program problem_15
 
     implicit none
 
-    integer :: iunit, i, j, k, n_lines, nrows, ncols, isum
+    integer :: iunit, i, j, k, n_lines_duplicate, nrows, ncols, isum
     character(len=:),allocatable :: line
     type(string),dimension(:),allocatable :: board_strs !! array of strings for the board
     logical :: reading_moves
@@ -23,11 +23,11 @@ program problem_15
     ! load file and parse the inputs:
     ! open(newunit=iunit, file='inputs/day15_test_2.txt', status='OLD')
     open(newunit=iunit, file='inputs/day15.txt', status='OLD')
-    n_lines = number_of_lines_in_file(iunit)
+    n_lines_duplicate = number_of_lines_in_file(iunit)
     reading_moves = .false.
     allocate(board_strs(0))
     moves = ''
-    do i = 1, n_lines
+    do i = 1, n_lines_duplicate
         line = read_line(iunit)
         if (line=='') then
             reading_moves = .true.
