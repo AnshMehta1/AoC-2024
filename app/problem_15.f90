@@ -122,7 +122,7 @@ contains
                 end if
             end do
         else
-            error stop 'invalid character: '//c
+            error stop
         end if
     end subroutine move_fish
 
