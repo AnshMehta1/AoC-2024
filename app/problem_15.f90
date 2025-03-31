@@ -45,7 +45,10 @@ program problem_15
     ncols = len(board_strs(1)%str)
     allocate(array(nrows,ncols))
     do i = 1, nrows
-        array(i,:) = [(board_strs(i)%str(j:j), j = 1, ncols)]
+        ! array(i,:) = [(board_strs(i)%str(j:j), j = 1, ncols)]
+        do j = 1, ncols
+            array(i,j) = board_strs(i)%str(j:j)
+        end do 
     end do
     iloc = findloc(array, FISH) ! find the fish
 
