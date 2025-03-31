@@ -6,7 +6,7 @@ program problem_11
 
     integer(ip),dimension(:),allocatable :: array
     integer :: iunit
-    integer(ip) :: i , j
+    integer(ip) :: i
 
     type :: stone
         integer(ip) :: value = 0 !! the value of this stone
@@ -14,7 +14,6 @@ program problem_11
     end type stone
     type(stone),dimension(:),allocatable :: unique_stones
     type(string),dimension(:),allocatable :: temp
-    integer(ip) ,dimension(:),allocatable :: temp_sum
 
     call clk%tic()
 
@@ -29,28 +28,12 @@ program problem_11
     do i = 1, 25
         unique_stones = blink(unique_stones)
     end do
-
-    allocate(temp_sum(size(unique_stones)))
-
-    do j = 1 , size(temp_sum) 
-        temp_sum(j) = unique_stones(j)%count
-    end do
-
-    write(*,*) '11a:', sum(temp_sum)
-    deallocate(temp_sum)
+    write(*,*) '11a:', sum(unique_stones%count)
 
     do i = 26, 75
         unique_stones = blink(unique_stones)
     end do
-
-    allocate(temp_sum(size(unique_stones)))
-
-    do j = 1 , size(temp_sum) 
-        temp_sum(j) = unique_stones(j)%count
-    end do
-
-    write(*,*) '11b:', sum(temp_sum)
-    deallocate(temp_sum)
+    write(*,*) '11b:', sum(unique_stones%count)
 
     call clk%toc('11')
 
@@ -94,7 +77,7 @@ program problem_11
         integer(ip),intent(in) :: val
         integer(ip),intent(in) :: icount !! the current count of val
         integer(ip) :: iloc
-        !iloc = findloc(s%value, val, dim=1) ! is it already there?
+        iloc = findloc(s%value, val, dim=1) ! is it already there?
         if (iloc==0) then
             s = [s, stone(val, icount)] ! add a new one
         else
