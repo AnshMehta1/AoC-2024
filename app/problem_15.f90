@@ -97,7 +97,7 @@ contains
         else if (c==SPACE) then
             ! move into the space
             array(i,j) = SPACE ! move the fish
-            c = FISH
+            !c = FISH
             i = inew; j = jnew
         elseif (c==BOX) then
             !is there an empty space past this box, or block of boxes?
@@ -114,7 +114,7 @@ contains
                 if (array(itmp,jtmp)==SPACE) then
                     ! we can move these
                     array(i,j)       = SPACE ! move the fish
-                    c                = FISH
+                    !c                = FISH
                     array(itmp,jtmp) = BOX   ! put box in the last space
                     i = inew; j = jnew
                     exit
